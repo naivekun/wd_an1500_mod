@@ -8,4 +8,4 @@ if [ "$1" == "" ]; then
 fi
 
 chmod +x mvf/mvf_*
-cd mvf && ./mvf_64 -wbf $FW_TO_FLASH -addr 0x00000000 -y && cd ..
+cd mvf && ./mvf_64 -wbf ../$FW_TO_FLASH -addr 0x00000000 -y && cd ..
