@@ -1,46 +1,48 @@
-# AN1500 modding tools and firmware
+# AN1500 修改工具和定制固件
 
-refers to https://cyberbus.net/post/40
+[README in English](README_en_US.md)
 
-## 1. direct flash with my modded firmware
+详情见 [https://cyberbus.net/post/40](https://cyberbus.net/post/40)
 
-if you are lazy to do the mod and just want your AN1500 support RAID0/1/JBOD and UEFI menu
+## 1. 直接使用修改版固件刷写
 
-```
+如果您不想自己动手修改，只想让 AN1500 支持 RAID0/1/JBOD 和 UEFI 菜单，可以直接运行：
+
+```bash
 ./flash_fw.sh ./an1500_backup_20241107_mod.bin
 ```
 
-## 2. extract your AN1500 firmware, mod hbainfo and Option ROM
+## 2. 提取 AN1500 固件，修改 hbainfo 和 Option ROM
 
-### backup firmware
+### 备份固件
 
 ```
 ./firmware_backup.sh an1500_backup.bin
 ```
 
-and you may cut it into 7MB file according to the post or video
+您可以根据文章或视频说明将其裁剪为 7MB 大小的文件
 
-### flash firmware (with mnv_cli)
+### 刷写固件（使用 mnv_cli）
 
-flashing firmware with this method is recommended
+推荐使用此方法刷写固件
 
 ```
 ./flash_fw.sh an1500_backup.bin
 ```
 
-### force flash firmware (with mvf)
+### 强制刷写固件（使用 mvf）
 
-if your card can't flash firmware with mnv_cli, you have to
+如果您的设备无法使用 mnv_cli 刷写固件，您需要：
 
-1. enable `iommu=relaxed` in your kernel
-2. flash firmware using mvf
+1. 在内核中启用 `iommu=relaxed` 
+2. 使用 mvf 刷写固件
 
 ```
 ./force_flash_fw.sh an1500_backup.bin
 ```
 
-## 3. files
+## 3. 文件说明
 
-* `crc_fix.py` can fix 7MB firmware and calculate checksum, you have to replace checksum at the end of 7MB firmware
-* `oprom_full.bin` is a functional option rom which is intented to replace at 0x60_0000 of 7MB firmware
-* `hbainfo.bin` is the HBA info structure to unlock RAID0/1/JBOD, which is intended to replace at 0x2_0000 of 7MB firmware
+* `crc_fix.py` - 用于修复 7MB 固件并计算校验和，您需要将计算出的校验和替换到 7MB 固件末尾
+* `oprom_full.bin` - 这是一个功能完整的选项 ROM，用于替换 7MB 固件中 0x60_0000 位置的内容
+* `hbainfo.bin` - 这是用于解锁 RAID0/1/JBOD 功能的 HBA 信息结构，用于替换 7MB 固件中 0x2_0000 位置的内容
