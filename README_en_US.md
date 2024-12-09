@@ -34,7 +34,7 @@ flashing firmware with this method is recommended
 
 if your card can't flash firmware with mnv_cli, you have to
 
-1. enable `iommu=relaxed` in your kernel
+1. enable `iomem=relaxed` in your kernel
 2. flash firmware using mvf
 
 ```

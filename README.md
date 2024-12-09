@@ -34,7 +34,7 @@
 
 如果您的设备无法使用 mnv_cli 刷写固件，您需要：
 
-1. 在内核中启用 `iommu=relaxed` 
+1. 在内核中启用 `iomem=relaxed` 
 2. 使用 mvf 刷写固件
 
 ```
